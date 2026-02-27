@@ -1,0 +1,189 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kpops Annotated Mobile Wireframe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f04c6d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221014",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .wireframe-pattern {
+            background-color: #f8f6f6;
+            background-image:  linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .annotation-line {
+            position: absolute;
+            height: 2px;
+            background-color: #f04c6d;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-[1200px] mx-auto p-8 lg:p-12">
+<div class="flex flex-col md:flex-row gap-12 items-start justify-center">
+<!-- Mobile Wireframe Container -->
+<div class="relative w-[375px] h-[812px] bg-white border-8 border-slate-800 rounded-[3rem] overflow-hidden shadow-2xl shrink-0">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-8 bg-slate-200 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">image</span>
+</div>
+<div class="h-4 w-20 bg-slate-200 rounded"></div>
+</div>
+<div class="flex gap-2">
+<div class="size-8 rounded-full bg-slate-200"></div>
+<div class="size-8 rounded-full bg-slate-200"></div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="wireframe-pattern h-full overflow-y-auto pb-32">
+<!-- Hero Section -->
+<section class="p-4 space-y-4">
+<div class="aspect-video w-full bg-slate-300 rounded-lg flex items-center justify-center border-2 border-dashed border-slate-400">
+<span class="material-symbols-outlined text-slate-500 scale-150">image</span>
+</div>
+<div class="space-y-2">
+<div class="h-8 w-3/4 bg-slate-800 rounded"></div>
+<div class="h-4 w-1/2 bg-slate-400 rounded"></div>
+</div>
+</section>
+<!-- Quick Picks -->
+<section class="mt-6">
+<div class="px-4 flex justify-between items-center mb-3">
+<div class="h-5 w-24 bg-slate-800 rounded"></div>
+<div class="h-3 w-12 bg-slate-300 rounded"></div>
+</div>
+<div class="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+<div class="flex-none w-20 space-y-2">
+<div class="size-20 bg-slate-200 rounded-full border-2 border-slate-300"></div>
+<div class="h-3 w-full bg-slate-300 rounded mx-auto"></div>
+</div>
+<div class="flex-none w-20 space-y-2">
+<div class="size-20 bg-slate-200 rounded-full border-2 border-slate-300"></div>
+<div class="h-3 w-full bg-slate-300 rounded mx-auto"></div>
+</div>
+<div class="flex-none w-20 space-y-2">
+<div class="size-20 bg-slate-200 rounded-full border-2 border-slate-300"></div>
+<div class="h-3 w-full bg-slate-300 rounded mx-auto"></div>
+</div>
+<div class="flex-none w-20 space-y-2">
+<div class="size-20 bg-slate-200 rounded-full border-2 border-slate-300"></div>
+<div class="h-3 w-full bg-slate-300 rounded mx-auto"></div>
+</div>
+</div>
+</section>
+<!-- Menu Grid -->
+<section class="p-4 mt-4 grid grid-cols-2 gap-4">
+<div class="aspect-square bg-slate-200 rounded-lg border border-slate-300"></div>
+<div class="aspect-square bg-slate-200 rounded-lg border border-slate-300"></div>
+</section>
+</div>
+<!-- Sticky Footer CTA -->
+<div class="absolute bottom-6 left-4 right-4 h-14 flex gap-2">
+<div class="w-[70%] bg-primary rounded-full flex items-center justify-center shadow-lg">
+<div class="h-4 w-24 bg-white/40 rounded"></div>
+</div>
+<div class="w-[30%] bg-slate-800 rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white">menu</span>
+</div>
+</div>
+<!-- Visual Anchors for Lines -->
+<div class="absolute top-6 right-0 size-2" id="anchor-header"></div>
+<div class="absolute top-48 right-0 size-2" id="anchor-hero"></div>
+<div class="absolute top-[440px] right-0 size-2" id="anchor-picks"></div>
+<div class="absolute bottom-12 right-0 size-2" id="anchor-footer"></div>
+</div>
+<!-- Annotations Column -->
+<div class="flex-1 space-y-8 py-4">
+<div class="border-l-4 border-primary pl-6 py-2">
+<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-2">Annotated Wireframe</h1>
+<p class="text-slate-600">Mobile-First High-Conversion Landing Page for Kpops Pachuca.</p>
+</div>
+<!-- Annotation 1 -->
+<div class="relative group">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-200 transition-all hover:shadow-md">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">1</div>
+<div>
+<h3 class="font-bold text-slate-900">Sticky Header: Quick social access</h3>
+<p class="text-sm text-slate-600 mt-1">Logo + Instagram/Map shortcuts. Ensures credibility and location verification is always 1 tap away.</p>
+</div>
+</div>
+</div>
+<!-- Annotation 2 -->
+<div class="relative group">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-200 transition-all hover:shadow-md">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">2</div>
+<div>
+<h3 class="font-bold text-slate-900">Hero: 1-screen decision info</h3>
+<p class="text-sm text-slate-600 mt-1">Concise value proposition: Price ($), Locality (Pachuca), and Speed (15-30m). Everything needed to decide is above the fold.</p>
+</div>
+</div>
+</div>
+<!-- Annotation 3 -->
+<div class="relative group">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-200 transition-all hover:shadow-md">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">3</div>
+<div>
+<h3 class="font-bold text-slate-900">Quick Picks: Lateral scroll</h3>
+<p class="text-sm text-slate-600 mt-1">Visual categories for rapid item selection. Reduces scrolling friction and improves discoverability of best-sellers.</p>
+</div>
+</div>
+</div>
+<!-- Annotation 4 -->
+<div class="relative group">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-200 transition-all hover:shadow-md">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">4</div>
+<div>
+<h3 class="font-bold text-slate-900">Sticky Bar: 70/30 CTA split</h3>
+<p class="text-sm text-slate-600 mt-1">Major action (70%) is "Order Now" to Instagram DM. Minor action (30%) is "Full Menu" to avoid choice paralysis.</p>
+</div>
+</div>
+</div>
+<!-- Annotation 5 -->
+<div class="relative group">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-200 transition-all hover:shadow-md">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">5</div>
+<div>
+<h3 class="font-bold text-slate-900">Modals: Light &amp; Focused</h3>
+<p class="text-sm text-slate-600 mt-1">Secondary info like "Opening Hours" or "Flavor Details" trigger as modals. Keeps the landing page short and lightning-fast.</p>
+</div>
+</div>
+</div>
+<!-- Legend/Note -->
+<div class="mt-8 p-6 bg-primary/10 rounded-xl border border-primary/20">
+<div class="flex gap-2 items-center mb-2">
+<span class="material-symbols-outlined text-primary">info</span>
+<span class="font-bold text-primary">Conversion Logic</span>
+</div>
+<p class="text-sm text-slate-700 leading-relaxed">
+                        This wireframe prioritizes the <strong>Mobile Decision Journey</strong>. By limiting vertical depth and focusing on the CTA split, we drive users directly to the high-converting Instagram DM interface.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-12 py-8 border-t border-slate-200 text-center text-slate-400 text-sm">
+<p>© 2024 Kpops Pachuca • Design System: Modern-Clean • Platform: Web/Mobile</p>
+</footer>
+</body></html>

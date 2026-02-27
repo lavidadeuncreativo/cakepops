@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description"
+        content="Kpops - Cakepops y brownies artesanales en Pachuca, Hidalgo. Hecho al pedido con amor." />
+    <title>Kpops — Las mejores cakepops de Pachuca</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f24a69",
+                        "background-light": "#FFF4E8",
+                        "background-dark": "#221013",
+                        "chocolate": "#3A241B",
+                    },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    zIndex: { '60': '60', '70': '70', '80': '80' },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-zinc-900 text-chocolate antialiased min-h-screen">
+
+    <!-- ╔══════════════════════════════════════╗
+     ║          MAIN APP CONTAINER          ║
+     ╚══════════════════════════════════════╝ -->
+    <main id="app-container"
+        class="w-full max-w-[480px] lg:max-w-[1100px] mx-auto min-h-screen bg-background-light relative shadow-2xl lg:shadow-none overflow-x-hidden transform origin-bottom z-10">
+
+        <!-- TV Ticker -->
+        <div class="bg-primary overflow-hidden py-1.5 relative flex items-center border-b border-primary/30">
+            <div class="marquee-track">
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🍭
+                    Hecho al pedido en Pachuca</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🌸
+                    Especial Primavera 2026</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">📦
+                    Mínimo 6 piezas</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">⏱
+                    Listo en 48h</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">💌
+                    Ordena por Instagram</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🎉
+                    Reseña = cakepop gratis</span><span class="marquee-separator text-white/40">✦</span>
+                <!-- duplicate -->
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🍭
+                    Hecho al pedido en Pachuca</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🌸
+                    Especial Primavera 2026</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">📦
+                    Mínimo 6 piezas</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">⏱
+                    Listo en 48h</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">💌
+                    Ordena por Instagram</span><span class="marquee-separator text-white/40">✦</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.15em] text-white whitespace-nowrap px-4">🎉
+                    Reseña = cakepop gratis</span><span class="marquee-separator text-white/40">✦</span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 bg-background-light/90 backdrop-blur-md px-4 py-3 border-b border-primary/10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="images/logo.png" alt="Kpops" class="h-8 w-8 rounded-full object-cover" />
+                <h2 class="text-lg font-extrabold tracking-tight text-chocolate">Kpops</h2>
+            </div>
+            <div class="flex items-center gap-2">
+                <nav class="hidden lg:flex items-center gap-6 mr-4 text-sm font-bold text-chocolate/70">
+                    <button class="open-menu-btn hover:text-primary transition-colors">Menú</button>
+                    <button class="open-review-btn hover:text-primary transition-colors">Reseñas</button>
+                </nav>
+                <button id="header-order-btn"
+                    class="open-order-btn magnetic-btn bg-primary text-white px-5 py-2 rounded-full text-xs font-black shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all">
+                    <span class="magnetic-text">Pedir 🍭</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ── HERO SECTION ─────────────────────────────────── -->
+        <section
+            class="hero-section px-4 pt-6 pb-4 flex flex-col gap-5 lg:flex-row lg:gap-12 lg:px-16 lg:pt-16 lg:pb-12 lg:items-center">
+
+            <!-- Image Flipper (LEFT col on desktop) -->
+            <div class="hero-image-col relative lg:flex-1 lg:max-w-[480px]">
+                <div id="hero-flipper" class="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-primary/5">
+                    <img id="hero-img" class="hero-image w-full h-full object-cover transition-none"
+                        alt="Kpops cakepops Pachuca" src="images/hero.jpg" />
+                </div>
+                <div
+                    class="hero-chip absolute -top-3 -right-3 bg-primary text-white px-4 py-2 rounded-full shadow-lg rotate-6 border-2 border-white pointer-events-none">
+                    <p class="text-[9px] font-black uppercase">⭐ Top en Pachuca</p>
+                </div>
+                <!-- Image indicator dots -->
+                <div id="hero-dots"
+                    class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 pointer-events-none">
+                    <span class="dot w-1.5 h-1.5 rounded-full bg-white opacity-100 transition-all duration-300"></span>
+                    <span class="dot w-1.5 h-1.5 rounded-full bg-white opacity-40 transition-all duration-300"></span>
+                    <span class="dot w-1.5 h-1.5 rounded-full bg-white opacity-40 transition-all duration-300"></span>
+                    <span class="dot w-1.5 h-1.5 rounded-full bg-white opacity-40 transition-all duration-300"></span>
+                    <span class="dot w-1.5 h-1.5 rounded-full bg-white opacity-40 transition-all duration-300"></span>
+                </div>
+            </div>
+
+            <!-- Text + CTAs (RIGHT col on desktop) -->
+            <div class="hero-text-col flex flex-col gap-4 lg:flex-1">
+                <h1 class="hero-title text-[2rem] font-[900] leading-[1.08] text-chocolate tracking-tight">
+                    Las cakepops y brownies preferidos de Pachuca.
+                </h1>
+
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="hero-chip px-3 py-1.5 bg-white/70 border border-primary/20 rounded-full text-[11px] font-bold flex items-center gap-1.5 shadow-sm">
+                        <span class="material-symbols-outlined text-primary text-xs">payments</span> Desde $17
+                    </span>
+                    <span
+                        class="hero-chip px-3 py-1.5 bg-white/70 border border-primary/20 rounded-full text-[11px] font-bold flex items-center gap-1.5 shadow-sm">
+                        <span class="material-symbols-outlined text-primary text-xs">location_on</span> Pachuca, Hgo.
+                    </span>
+                    <span
+                        class="hero-chip px-3 py-1.5 bg-white/70 border border-primary/20 rounded-full text-[11px] font-bold flex items-center gap-1.5 shadow-sm">
+                        <span class="material-symbols-outlined text-primary text-xs">schedule</span> Listos en 48h
+                    </span>
+                </div>
+
+                <p class="text-sm text-chocolate/60 leading-relaxed hidden lg:block">Artesanales, únicos y hechos con
+                    todo el amor del mundo. Perfectos para cualquier ocasión — cumpleaños, bodas, baby showers y más.
+                </p>
+
+                <div class="flex flex-col gap-2.5">
+                    <a href="https://www.instagram.com" target="_blank"
+                        class="hero-action open-order-btn magnetic-btn w-full bg-primary text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-transform">
+                        <span class="magnetic-text inline-flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-base">send</span>
+                            Pedir por Instagram
+                        </span>
+                    </a>
+                    <button
+                        class="hero-action open-menu-btn magnetic-btn w-full bg-white border-2 border-chocolate/10 py-3.5 rounded-2xl font-bold text-chocolate text-sm active:scale-95 transition-transform shadow-sm">
+                        <span class="magnetic-text">Ver menú completo</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FAVORITOS SECTION ───────────────────────────── -->
+        <section class="favoritos-section py-5">
+            <div class="px-4 flex justify-between items-center mb-3">
+                <h3 class="text-lg font-black text-chocolate">Favoritos ✨</h3>
+                <button class="open-menu-btn text-xs font-bold text-primary hover:underline">Ver todos →</button>
+            </div>
+            <div class="favoritos-grid flex overflow-x-auto no-scrollbar gap-3 px-4 pb-2">
+                <div
+                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                        <img class="w-full h-full object-cover" alt="Cakepops" src="images/product1.jpg" />
+                    </div>
+                    <p class="text-xs font-bold mb-0.5 truncate">Cakepops</p>
+                    <p class="text-primary font-black text-sm mb-2.5">$17 <span
+                            class="text-[10px] text-chocolate/40 font-medium">c/u</span></p>
+                    <button
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                </div>
+                <div
+                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                        <img class="w-full h-full object-cover" alt="Brownie Bites" src="images/product2.jpg" />
+                    </div>
+                    <p class="text-xs font-bold mb-0.5 truncate">Brownie Bites</p>
+                    <p class="text-primary font-black text-sm mb-2.5">$165 <span
+                            class="text-[10px] text-chocolate/40 font-medium">caja</span></p>
+                    <button
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                </div>
+                <div
+                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                        <img class="w-full h-full object-cover" alt="Caja 3 Brownies" src="images/product3.jpg" />
+                    </div>
+                    <p class="text-xs font-bold mb-0.5 truncate">Caja 3 Brownies</p>
+                    <p class="text-primary font-black text-sm mb-2.5">$120 <span
+                            class="text-[10px] text-chocolate/40 font-medium">pack</span></p>
+                    <button
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                </div>
+                <div
+                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                        <img class="w-full h-full object-cover" alt="Cakepops con packaging"
+                            src="images/product4.jpg" />
+                    </div>
+                    <p class="text-xs font-bold mb-0.5 truncate">Caja 6 Cakepops</p>
+                    <p class="text-primary font-black text-sm mb-2.5">$102 <span
+                            class="text-[10px] text-chocolate/40 font-medium">pack</span></p>
+                    <button
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                </div>
+                <div
+                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                        <img class="w-full h-full object-cover" alt="Combo especial" src="images/product5.jpg" />
+                    </div>
+                    <p class="text-xs font-bold mb-0.5 truncate">Combo Especial</p>
+                    <p class="text-primary font-black text-sm mb-2.5">$220 <span
+                            class="text-[10px] text-chocolate/40 font-medium">combo</span></p>
+                    <button
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REVIEWS SECTION (3-ROW MARQUEE) ──────────────── -->
+        <section class="reviews-section py-7 bg-white/50">
+            <div class="px-4 flex items-center justify-between mb-5">
+                <h3 class="text-lg font-black text-chocolate flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">stars</span>
+                    Reviews Reales
+                </h3>
+                <div class="flex items-center gap-1 bg-primary/10 px-3 py-1.5 rounded-full">
+                    <span class="text-yellow-400 text-sm">★</span>
+                    <span class="text-xs font-black text-chocolate">5.0</span>
+                    <span class="text-[10px] text-chocolate/45 ml-0.5">(48+)</span>
+                </div>
+            </div>
+
+            <!-- Row 1: RTL -->
+            <div class="reviews-strip mb-3">
+                <div id="rv-row-1" class="reviews-row reviews-row--rtl pl-3"></div>
+            </div>
+            <!-- Row 2: LTR -->
+            <div class="reviews-strip mb-3">
+                <div id="rv-row-2" class="reviews-row reviews-row--ltr pl-3"></div>
+            </div>
+            <!-- Row 3: RTL -->
+            <div class="reviews-strip mb-6">
+                <div id="rv-row-3" class="reviews-row reviews-row--rtl pl-3"></div>
+            </div>
+
+            <!-- Dynamic User Reviews -->
+            <div id="dynamic-reviews" class="px-4 space-y-3 mb-5"></div>
+
+            <!-- CTA banner -->
+            <div class="px-4">
+                <button
+                    class="open-review-btn w-full bg-primary p-5 rounded-2xl text-white shadow-lg shadow-primary/25 flex items-center justify-between hover:shadow-primary/40 transition-shadow active:scale-[0.98]">
+                    <span>
+                        <p class="font-black text-left text-sm leading-tight">¡Deja tu reseña y gana una cakepop gratis!
+                            🍭</p>
+                        <p class="text-xs opacity-70 mt-1 text-left">Adjunta tu foto y únete a la comunidad</p>
+                    </span>
+                    <span class="material-symbols-outlined text-white ml-3 flex-shrink-0 text-2xl">chevron_right</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ── FOOTER ─────────────────────────────────────── -->
+        <footer class="bg-background-light px-6 pt-10 pb-40 flex flex-col gap-8">
+            <div class="footer-inner flex flex-col gap-6">
+                <div class="space-y-3">
+                    <h2 class="text-[28px] font-black text-chocolate leading-[1.1] tracking-tight">
+                        Hechos con harto amor en Pachuca. ✨
+                    </h2>
+                    <p class="text-sm text-chocolate/55">Cada pedido se hace a mano, con ingredientes selectos. No somos
+                        fábrica — somos artesanía dulce.</p>
+                    <div class="flex gap-3">
+                        <a href="https://instagram.com" target="_blank"
+                            class="p-3 bg-chocolate/5 rounded-full flex items-center justify-center hover:bg-primary/15 transition-colors"
+                            aria-label="Instagram">
+                            <svg class="w-5 h-5 fill-chocolate" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/52" target="_blank"
+                            class="p-3 bg-chocolate/5 rounded-full flex items-center justify-center hover:bg-primary/15 transition-colors"
+                            aria-label="WhatsApp">
+                            <svg class="w-5 h-5 fill-chocolate" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="pt-5 border-t border-chocolate/10 space-y-3">
+                    <p class="text-xs font-bold uppercase tracking-widest text-chocolate/35">Info</p>
+                    <p class="text-sm font-semibold text-chocolate">Pachuca, Hgo. • Mar–Sáb 11am–7pm</p>
+                    <a href="https://www.instagram.com" target="_blank"
+                        class="inline-flex items-center gap-2 text-primary font-extrabold text-sm border-b-2 border-primary pb-0.5 hover:opacity-80 transition-opacity">
+                        Pedir por Instagram <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                    <p class="text-[11px] text-chocolate/40 italic">No somos fábrica. Cada pedido es único.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating Action Bar (hidden on desktop, users can use header button) -->
+        <div id="floating-bar"
+            class="fixed bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] w-full px-4 pb-4 pt-2 pointer-events-none z-40 lg:hidden">
+            <div
+                class="w-full flex gap-2 pointer-events-auto bg-white/95 backdrop-blur-xl p-2.5 rounded-2xl border border-primary/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)]">
+                <a href="https://www.instagram.com" target="_blank"
+                    class="open-order-btn flex-[7] bg-primary text-white py-3.5 rounded-xl font-black text-sm shadow-lg shadow-primary/25 active:scale-95 transition-transform flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-base">send</span> Pedir por IG
+                </a>
+                <button
+                    class="open-order-btn flex-[3] bg-chocolate text-white py-3.5 rounded-xl font-black text-sm active:scale-95 transition-transform flex items-center justify-center">
+                    Armar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Backdrop -->
+    <div id="backdrop-overlay" class="fixed inset-0 z-60 bg-black/60 backdrop-blur-sm pointer-events-none opacity-0">
+    </div>
+
+    <!-- Modals Container - fixed, centered, max 720px wide -->
+    <div id="modals-container"
+        class="fixed inset-0 z-70 pointer-events-none flex items-end justify-center overflow-hidden"
+        style="max-width:720px; left:50%; transform:translateX(-50%);">
+
+        <!-- ╔═══════ MENU SHEET ════════╗ -->
+        <div id="menu-sheet"
+            class="w-full max-w-[720px] bg-white rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
+            <!-- Handle + Close -->
+            <div class="flex justify-center pt-3 pb-1 relative flex-shrink-0">
+                <div class="w-10 h-1 bg-slate-200 rounded-full"></div>
+                <button
+                    class="close-modal-btn absolute right-4 top-2.5 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            <!-- Header -->
+            <div class="px-5 pb-2 flex-shrink-0 modal-animate-in">
+                <h2 class="text-2xl font-black text-chocolate">Menú completo 🛍️</h2>
+                <p class="text-xs text-chocolate/50 mt-0.5">Selecciona lo que más te antoje</p>
+            </div>
+            <!-- Tabs -->
+            <div class="px-5 flex gap-6 border-b border-slate-100 flex-shrink-0 modal-animate-in">
+                <button class="tab-link py-2.5 text-sm font-bold border-b-2 border-primary text-primary"
+                    data-tab="cakepops">Cakepops</button>
+                <button class="tab-link py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400"
+                    data-tab="brownies">Brownies</button>
+                <button class="tab-link py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400"
+                    data-tab="cajas">Combos</button>
+            </div>
+            <!-- Tab Panels (scrollable) -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 pb-28">
+
+                <!-- Cakepops Panel -->
+                <div class="tab-panel active" data-panel="cakepops">
+                    <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
+                        <img class="w-full h-full object-cover" src="images/product1.jpg" alt="Cakepops" />
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-black text-chocolate">Cakepops Artesanales</h3>
+                        <span class="text-primary font-black text-lg">$17 c/u</span>
+                    </div>
+                    <p class="text-sm text-chocolate/60 leading-relaxed mb-4">Hechas con bizcocho suave y bañadas en
+                        cobertura premium. Perfectas para cualquier ocasión. Pedido mínimo de 6 piezas.</p>
+                    <div class="bg-primary/5 rounded-2xl p-4 border border-primary/10 mb-5">
+                        <p class="text-xs font-black text-primary uppercase tracking-wider mb-2">Sabores disponibles</p>
+                        <div class="grid grid-cols-2 gap-y-2 gap-x-4">
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Chocolate</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Vainilla</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Red Velvet</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Cookies &
+                                Cream</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Fresa</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Limón</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Conejito
+                                Turín</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Nutella</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white border border-primary/10 rounded-xl p-3">
+                            <p class="text-xs text-chocolate/50 font-bold uppercase tracking-wider mb-1.5">Pack 6</p>
+                            <p class="text-primary font-black">$102</p>
+                        </div>
+                        <div class="bg-white border border-primary/10 rounded-xl p-3">
+                            <p class="text-xs text-chocolate/50 font-bold uppercase tracking-wider mb-1.5">Pack 12</p>
+                            <p class="text-primary font-black">$200</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brownies Panel -->
+                <div class="tab-panel" data-panel="brownies">
+                    <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
+                        <img class="w-full h-full object-cover" src="images/product2.jpg" alt="Brownie Bites" />
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-black text-chocolate">Brownie Bites</h3>
+                        <span class="text-primary font-black text-lg">$165 caja</span>
+                    </div>
+                    <p class="text-sm text-chocolate/60 leading-relaxed mb-4">Caja con 12 bocados de brownie de
+                        chocolate belga. Húmedos, densos y adictivos. Para las que saben lo que quieren.</p>
+                    <div class="bg-primary/5 rounded-2xl p-4 border border-primary/10 mb-5">
+                        <p class="text-xs font-black text-primary uppercase tracking-wider mb-2">Sabores</p>
+                        <div class="grid grid-cols-2 gap-y-2">
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 bg-primary rounded-full"></span>Chocolate</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 bg-primary rounded-full"></span>Nutella</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 bg-primary rounded-full"></span>Cheesecake</span>
+                            <span class="text-xs text-chocolate/75 flex items-center gap-1.5"><span
+                                    class="w-1.5 h-1.5 bg-primary rounded-full"></span>Caramelo</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white border border-primary/10 rounded-xl p-3">
+                            <p class="text-xs text-chocolate/50 font-bold uppercase tracking-wider mb-1.5">Caja 6</p>
+                            <p class="text-primary font-black">$90</p>
+                        </div>
+                        <div class="bg-white border border-primary/10 rounded-xl p-3">
+                            <p class="text-xs text-chocolate/50 font-bold uppercase tracking-wider mb-1.5">Caja 12</p>
+                            <p class="text-primary font-black">$165</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combos Panel -->
+                <div class="tab-panel" data-panel="cajas">
+                    <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
+                        <img class="w-full h-full object-cover" src="images/product3.jpg" alt="Combos" />
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-black text-chocolate">Combos Especiales</h3>
+                        <span class="text-primary font-black text-lg">Desde $200</span>
+                    </div>
+                    <p class="text-sm text-chocolate/60 leading-relaxed mb-4">Arma tu caja mixta perfecta. Mezcla de
+                        cakepops y brownies. Ideal para eventos, regalos corporativos y sorpresas.</p>
+                    <div class="space-y-3">
+                        <div class="bg-white border border-primary/10 rounded-xl p-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-black text-chocolate">Combo Surtido S</p>
+                                <p class="text-xs text-chocolate/50">4 cakepops + 4 brownie bites</p>
+                            </div>
+                            <p class="text-primary font-black">$130</p>
+                        </div>
+                        <div class="bg-white border border-primary/10 rounded-xl p-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-black text-chocolate">Combo Surtido M</p>
+                                <p class="text-xs text-chocolate/50">8 cakepops + 8 brownie bites</p>
+                            </div>
+                            <p class="text-primary font-black">$240</p>
+                        </div>
+                        <div
+                            class="bg-primary/5 border border-primary/20 rounded-xl p-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-black text-chocolate">Combo Evento 🎉</p>
+                                <p class="text-xs text-chocolate/50">24+ piezas. Precio especial</p>
+                            </div>
+                            <p class="text-primary font-black">Cotizar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fixed Footer -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-100">
+                <button
+                    class="open-order-btn w-full bg-primary text-white font-black py-4 rounded-2xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 active:scale-95 transition-transform text-sm">
+                    <span class="material-symbols-outlined text-base">shopping_cart_checkout</span> Elegir y armar
+                    pedido
+                </button>
+            </div>
+        </div>
+
+        <!-- ╔═══════ ORDER SHEET ════════╗ -->
+        <div id="order-sheet"
+            class="w-full bg-background-light rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
+            <div class="flex flex-col items-center pt-3 pb-2 relative border-b border-primary/5 flex-shrink-0">
+                <div class="w-10 h-1 bg-slate-200 rounded-full mb-3"></div>
+                <div class="flex items-center justify-between w-full px-5 modal-animate-in">
+                    <h2 class="text-lg font-black text-chocolate">Arma tu pedido 🛒</h2>
+                    <button
+                        class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+                <div class="w-full px-5 mt-3 modal-animate-in">
+                    <div class="flex justify-between text-xs mb-1.5">
+                        <span class="font-bold text-primary uppercase tracking-wide">Paso <span id="step-label">1</span>
+                            de 3</span>
+                        <span class="text-slate-400" id="step-desc">Selección</span>
+                    </div>
+                    <div class="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-primary rounded-full transition-all duration-500"
+                            style="width:33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 pb-32">
+                <!-- Category -->
+                <div class="mb-5 modal-animate-in">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">¿Qué se te antoja?
+                    </h3>
+                    <div class="flex h-11 w-full items-center bg-primary/5 rounded-xl p-1 border border-primary/10">
+                        <label
+                            class="flex cursor-pointer h-full grow items-center justify-center rounded-lg has-[:checked]:bg-white has-[:checked]:text-primary text-slate-400 text-xs font-bold transition-all has-[:checked]:shadow-sm">
+                            <span>Cakepops</span><input checked class="invisible w-0" name="category" type="radio"
+                                value="Cakepops" />
+                        </label>
+                        <label
+                            class="flex cursor-pointer h-full grow items-center justify-center rounded-lg has-[:checked]:bg-white has-[:checked]:text-primary text-slate-400 text-xs font-bold transition-all has-[:checked]:shadow-sm">
+                            <span>Brownies</span><input class="invisible w-0" name="category" type="radio"
+                                value="Brownies" />
+                        </label>
+                        <label
+                            class="flex cursor-pointer h-full grow items-center justify-center rounded-lg has-[:checked]:bg-white has-[:checked]:text-primary text-slate-400 text-xs font-bold transition-all has-[:checked]:shadow-sm">
+                            <span>Combo</span><input class="invisible w-0" name="category" type="radio" value="Cajas" />
+                        </label>
+                    </div>
+                </div>
+                <!-- Quantity -->
+                <div class="mb-5 modal-animate-in">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">Cantidad</h3>
+                    <div
+                        class="flex items-center justify-between bg-white border border-primary/10 rounded-xl px-4 py-3">
+                        <button id="qty-minus"
+                            class="w-9 h-9 flex items-center justify-center text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors text-xl font-black">−</button>
+                        <span id="qty-display" class="font-black text-chocolate text-lg">6</span>
+                        <button id="qty-plus"
+                            class="w-9 h-9 flex items-center justify-center text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors text-xl font-black">+</button>
+                    </div>
+                </div>
+                <!-- Flavors -->
+                <div class="mb-5 modal-animate-in">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">Sabores (selecciona
+                        varios)</h3>
+                    <div id="flavor-chips" class="flex flex-wrap gap-2">
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold border border-primary"
+                            data-flavor="Chocolate">Chocolate ✓</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Vainilla">Vainilla</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Oreo">Oreo</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Red Velvet">Red Velvet</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Fresa">Fresa</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Limón">Limón</button>
+                        <button
+                            class="flavor-chip px-3.5 py-1.5 rounded-full bg-white text-slate-500 text-xs font-bold border border-slate-200"
+                            data-flavor="Conejito Turín">Conejito Turín</button>
+                    </div>
+                </div>
+                <!-- Date & Method -->
+                <div class="mb-5 modal-animate-in">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">Entrega</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Fecha</label>
+                            <input type="date" id="order-date"
+                                class="w-full px-3 py-2.5 bg-white border border-primary/15 rounded-xl text-xs font-medium text-chocolate focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Método</label>
+                            <select id="order-method"
+                                class="w-full px-3 py-2.5 bg-white border border-primary/15 rounded-xl text-xs font-medium text-chocolate focus:outline-none focus:ring-2 focus:ring-primary/30">
+                                <option>🛵 Domicilio</option>
+                                <option>🏪 Recoger</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Message Preview -->
+                <div class="modal-animate-in">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">Tu mensaje de pedido
+                    </h3>
+                    <div class="bg-white border border-slate-100 rounded-2xl p-4">
+                        <p id="msg-preview" class="text-xs text-chocolate/70 leading-relaxed italic">
+                            "Hola Kpops! 🍭 Quiero ordenar 6 Cakepops (Chocolate) para entrega en Pachuca. ¿Me confirman
+                            disponibilidad? ✨"
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div
+                class="absolute bottom-0 left-0 right-0 px-5 pb-6 pt-3 bg-background-light/95 backdrop-blur-md border-t border-slate-100 space-y-2.5">
+                <button id="copy-msg-btn"
+                    class="w-full py-3.5 flex items-center justify-center gap-2 bg-slate-100 text-chocolate rounded-xl font-bold text-sm active:scale-95 transition-transform hover:bg-slate-200">
+                    <span class="material-symbols-outlined text-base">content_copy</span> Copiar mensaje
+                </button>
+                <a href="https://www.instagram.com" target="_blank"
+                    class="w-full py-3.5 flex items-center justify-center gap-2 bg-primary text-white rounded-xl font-black text-sm shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined text-base">send</span> Abrir Instagram DM
+                </a>
+            </div>
+        </div>
+
+        <!-- ╔═══════ REVIEW SHEET ═══════╗ -->
+        <div id="review-sheet"
+            class="w-full bg-background-light rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
+            <div class="w-full flex justify-center pt-3 pb-1 relative flex-shrink-0">
+                <div class="w-10 h-1 bg-slate-200 rounded-full"></div>
+                <button
+                    class="close-modal-btn absolute right-4 top-2 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            <div class="px-5 pb-4 border-b border-primary/10 flex-shrink-0 modal-animate-in">
+                <h2 class="text-2xl font-black text-chocolate">Tu reseña 🍭</h2>
+                <p class="text-xs text-slate-500 mt-1">Comparte tu experiencia y gana una cakepop gratis</p>
+            </div>
+            <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-5 space-y-5 pb-32">
+                <div class="modal-animate-in">
+                    <label class="text-xs font-black uppercase tracking-wider text-slate-400 block mb-2">Tu
+                        nombre</label>
+                    <input id="review-name" type="text" placeholder="Ej. Andrea M."
+                        class="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-slate-300" />
+                </div>
+                <div class="modal-animate-in">
+                    <label
+                        class="text-xs font-black uppercase tracking-wider text-slate-400 block mb-2.5">Calificación</label>
+                    <div class="flex gap-2" id="star-rating">
+                        <button class="star-btn" data-star="1">★</button>
+                        <button class="star-btn" data-star="2">★</button>
+                        <button class="star-btn" data-star="3">★</button>
+                        <button class="star-btn" data-star="4">★</button>
+                        <button class="star-btn" data-star="5">★</button>
+                    </div>
+                </div>
+                <div class="modal-animate-in">
+                    <label class="text-xs font-black uppercase tracking-wider text-slate-400 block mb-2">Tu
+                        experiencia</label>
+                    <textarea id="review-text" rows="3" placeholder="¿Qué te pareció? ¿Para qué ocasión los pediste?"
+                        class="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-slate-300 resize-none"></textarea>
+                </div>
+                <div class="modal-animate-in">
+                    <label class="text-xs font-black uppercase tracking-wider text-slate-400 block mb-2">Foto
+                        (opcional)</label>
+                    <label for="review-photo-input"
+                        class="flex items-center gap-3 w-full px-4 py-3.5 bg-primary/5 border-2 border-dashed border-primary/30 rounded-xl cursor-pointer hover:bg-primary/10 transition-colors">
+                        <span class="material-symbols-outlined text-primary text-2xl">add_a_photo</span>
+                        <span class="text-sm font-bold text-primary">Adjuntar foto</span>
+                    </label>
+                    <input id="review-photo-input" type="file" accept="image/*" class="hidden" />
+                    <img id="review-photo-preview" alt="preview" />
+                </div>
+            </div>
+            <div
+                class="absolute bottom-0 left-0 right-0 px-5 pb-6 pt-3 bg-background-light/95 backdrop-blur-md border-t border-primary/10">
+                <button id="submit-review-btn"
+                    class="w-full py-4 bg-primary text-white rounded-2xl font-black text-sm shadow-lg shadow-primary/30 flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined">check_circle</span> Enviar reseña
+                </button>
+            </div>
+        </div>
+
+    </div><!-- end modals-container -->
+
+    <!-- Google Fonts load -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="script.js"></script>
+</body>
+
+</html>

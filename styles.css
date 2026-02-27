@@ -1,0 +1,278 @@
+/* styles.css - Kpops */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Newsreader:opsz,wght@6..72,200..800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #FFF4E8;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar,
+.custom-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ── Modal transform helpers ─────────────────────────────── */
+#menu-sheet,
+#order-sheet,
+#review-sheet {
+    will-change: transform;
+}
+
+#app-container {
+    will-change: transform, filter, border-radius;
+}
+
+/* ── TV Marquee Ticker ───────────────────────────────────── */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 22s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-separator {
+    display: inline-block;
+    margin: 0 14px;
+    opacity: 0.45;
+}
+
+/* ── Reviews 3-Row Infinite Marquee ─────────────────────── */
+.reviews-strip {
+    overflow: hidden;
+    width: 100%;
+}
+
+.reviews-row {
+    display: flex;
+    width: max-content;
+    gap: 12px;
+    padding: 4px 0;
+}
+
+.reviews-row--rtl {
+    animation: revs-rtl 38s linear infinite;
+}
+
+.reviews-row--ltr {
+    animation: revs-ltr 34s linear infinite;
+}
+
+.reviews-row:hover {
+    animation-play-state: paused;
+}
+
+@keyframes revs-rtl {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes revs-ltr {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.rm-card {
+    flex-shrink: 0;
+    width: 240px;
+    background: white;
+    border-radius: 20px;
+    padding: 14px 16px;
+    border: 1px solid rgba(242, 74, 105, 0.12);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+}
+
+.rm-card .rm-stars {
+    color: #facc15;
+    font-size: 13px;
+}
+
+.rm-card .rm-name {
+    font-weight: 800;
+    font-size: 11px;
+}
+
+.rm-card .rm-text {
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgba(58, 36, 27, 0.72);
+    font-style: italic;
+    margin-top: 6px;
+}
+
+.rm-photo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: 1.5px solid rgba(242, 74, 105, 0.2);
+}
+
+/* ── Hero Image Flip ─────────────────────────────────────── */
+#hero-flipper {
+    perspective: 1200px;
+}
+
+#hero-img {
+    transform-style: preserve-3d;
+    display: block;
+}
+
+/* ── Star Rating ─────────────────────────────────────────── */
+.star-btn {
+    cursor: pointer;
+    transition: transform 0.15s, color 0.15s;
+    font-size: 28px;
+    color: #cbd5e1;
+}
+
+.star-btn.active {
+    color: #facc15;
+}
+
+.star-btn:hover {
+    color: #fbbf24;
+    transform: scale(1.2);
+}
+
+/* ── Review photo thumb ──────────────────────────────────── */
+#review-photo-preview {
+    display: none;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #f24a69;
+    margin-top: 8px;
+}
+
+.review-photo-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1.5px solid rgba(242, 74, 105, 0.3);
+    flex-shrink: 0;
+}
+
+/* ── Menu Tabs ───────────────────────────────────────────── */
+.tab-link {
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ══════════════════════════════════════════════════════════
+   DESKTOP RESPONSIVE  (≥900px)
+   ══════════════════════════════════════════════════════════ */
+@media (min-width: 900px) {
+    body {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        min-height: 100vh;
+    }
+
+    /* App container: wider, centered, rounded card feel */
+    #app-container {
+        max-width: 1120px !important;
+        border-radius: 24px !important;
+        margin: 2rem auto !important;
+        min-height: calc(100vh - 4rem) !important;
+        overflow-x: visible !important;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.18) !important;
+    }
+
+    /* ── Hero section: two visible columns ── */
+    /* Tailwind lg:flex-row handles the flex direction.
+       These rules refine sizing/spacing only. */
+    .hero-title {
+        font-size: 2.8rem !important;
+        line-height: 1.05 !important;
+    }
+
+    /* ── Favoritos: horizontal scroll → 5-col grid ── */
+    .favoritos-grid {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
+        overflow-x: visible !important;
+        gap: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 0 !important;
+    }
+
+    .favorito-card {
+        min-width: unset !important;
+        flex-shrink: unset !important;
+    }
+
+    /* ── Reviews rows wider on desktop ── */
+    .reviews-strip {
+        max-width: 100%;
+    }
+
+    /* ── Footer: two columns ── */
+    footer .footer-inner {
+        flex-direction: row !important;
+        gap: 5rem !important;
+        align-items: flex-start;
+    }
+
+    /* ── Floating bar hidden on desktop (header has the button) ── */
+    #floating-bar {
+        display: none !important;
+    }
+}
+
+/* Slightly larger hero text on wide screens */
+@media (min-width: 1200px) {
+    .hero-title {
+        font-size: 3.2rem !important;
+    }
+
+    #app-container {
+        max-width: 1200px !important;
+    }
+}
