@@ -105,20 +105,22 @@ function openModal(el) {
     if (!el || activeModal === el) return;
 
     if (activeModal) {
-        gsap.to(activeModal, { y: "100%", duration: 0.35, ease: "power2.in", onComplete: () => gsap.set(activeModal, { display: "none" }) });
+        // Fix 2: slower, smoother slide out
+        gsap.to(activeModal, { y: "100%", duration: 0.5, ease: "power3.inOut", onComplete: () => gsap.set(activeModal, { display: "none" }) });
     } else {
-        gsap.to(sys.appContainer, { scale: 0.93, y: 8, borderRadius: "28px", filter: "brightness(0.55) blur(3px)", duration: 0.55, ease: "premium" });
-        gsap.to(sys.backdrop, { opacity: 1, duration: 0.35, pointerEvents: 'auto' });
+        gsap.to(sys.appContainer, { scale: 0.94, y: 6, borderRadius: "28px", filter: "brightness(0.6) blur(2px)", duration: 0.65, ease: "premium" });
+        gsap.to(sys.backdrop, { opacity: 1, duration: 0.45, pointerEvents: 'auto' });
         sys.modalsContainer.style.pointerEvents = 'auto';
     }
 
     activeModal = el;
     gsap.set(el, { display: 'flex' });
-    gsap.fromTo(el, { y: "100%" }, { y: "0%", duration: 0.65, ease: "premium" });
+    // Fix 2: slower, smoother slide up
+    gsap.fromTo(el, { y: "100%" }, { y: "0%", duration: 0.75, ease: "premium" });
 
     const animEls = el.querySelectorAll('.modal-animate-in');
     if (animEls.length) {
-        gsap.fromTo(animEls, { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 0.7, ease: "back.out(1.3)", delay: 0.15 });
+        gsap.fromTo(animEls, { y: 24, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.8, ease: "power3.out", delay: 0.25 });
     }
 }
 
@@ -127,9 +129,10 @@ function closeModal() {
     const toClose = activeModal;
     activeModal = null;
 
-    gsap.to(toClose, { y: "100%", duration: 0.45, ease: "power3.in", onComplete: () => gsap.set(toClose, { display: 'none' }) });
-    gsap.to(sys.appContainer, { scale: 1, y: 0, borderRadius: "0px", filter: "brightness(1) blur(0px)", duration: 0.55, ease: "premium", delay: 0.05 });
-    gsap.to(sys.backdrop, { opacity: 0, duration: 0.35, pointerEvents: 'none', delay: 0.05, onComplete: () => { sys.modalsContainer.style.pointerEvents = 'none'; } });
+    // Fix 2: smoother close
+    gsap.to(toClose, { y: "100%", duration: 0.55, ease: "power3.inOut", onComplete: () => gsap.set(toClose, { display: 'none' }) });
+    gsap.to(sys.appContainer, { scale: 1, y: 0, borderRadius: "0px", filter: "brightness(1) blur(0px)", duration: 0.6, ease: "premium", delay: 0.08 });
+    gsap.to(sys.backdrop, { opacity: 0, duration: 0.45, pointerEvents: 'none', delay: 0.08, onComplete: () => { sys.modalsContainer.style.pointerEvents = 'none'; } });
 }
 
 // ═══ MENU TABS ══════════════════════════════════════════
@@ -165,11 +168,23 @@ function initMenuTabs() {
 let orderQty = 6;
 const selectedFlavors = new Set(['Chocolate']);
 
+function toggleDeliverySection() {
+    const method = document.getElementById('order-method')?.value;
+    const deliveryEl = document.getElementById('delivery-section');
+    const pickupEl = document.getElementById('pickup-section');
+    if (!deliveryEl || !pickupEl) return;
+    const isDomicilio = method === 'domicilio';
+    deliveryEl.style.display = isDomicilio ? 'block' : 'none';
+    pickupEl.style.display = isDomicilio ? 'none' : 'block';
+    updateMsgPreview();
+}
+
 function initOrderForm() {
     // Quantity stepper
     document.getElementById('qty-minus')?.addEventListener('click', () => {
-        if (orderQty > 1) { orderQty--; updateMsgPreview(); }
+        if (orderQty > 1) { orderQty--; }
         document.getElementById('qty-display').textContent = orderQty;
+        updateMsgPreview();
     });
     document.getElementById('qty-plus')?.addEventListener('click', () => {
         orderQty++;
@@ -196,12 +211,18 @@ function initOrderForm() {
         });
     });
 
+    // Method toggle → show address or pickup
+    document.getElementById('order-method')?.addEventListener('change', toggleDeliverySection);
+    document.getElementById('order-pickup')?.addEventListener('change', updateMsgPreview);
+    document.getElementById('order-address')?.addEventListener('input', updateMsgPreview);
+
     // Copy message
     document.getElementById('copy-msg-btn')?.addEventListener('click', () => {
         const msg = document.getElementById('msg-preview')?.textContent || '';
         navigator.clipboard.writeText(msg.trim()).then(() => {
             const btn = document.getElementById('copy-msg-btn');
-            btn.textContent = '✓ Copiado!';
+            if (!btn) return;
+            btn.innerHTML = '<span class="material-symbols-outlined text-base">check_circle</span> ¡Copiado!';
             btn.style.background = '#d1fae5';
             setTimeout(() => {
                 btn.innerHTML = '<span class="material-symbols-outlined text-base">content_copy</span> Copiar mensaje';
@@ -211,15 +232,57 @@ function initOrderForm() {
     });
 }
 
+// Fix 3: Google Maps Places Autocomplete for address field
+function initAddressAutocomplete() {
+    const input = document.getElementById('order-address');
+    if (!input) return;
+
+    function tryInit() {
+        if (window.google && window.google.maps && window.google.maps.places) {
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                componentRestrictions: { country: 'mx' },
+                types: ['address'],
+                fields: ['formatted_address'],
+            });
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (place.formatted_address) {
+                    input.value = place.formatted_address;
+                    updateMsgPreview();
+                }
+            });
+            // Style the pac-container (dropdown) to match our design
+            const style = document.createElement('style');
+            style.textContent = '.pac-container { font-family: \'Plus Jakarta Sans\', sans-serif; border-radius: 12px; border: 1px solid rgba(242,74,105,0.2); box-shadow: 0 8px 24px rgba(0,0,0,0.12); margin-top: 4px; } .pac-item { font-size: 11px; padding: 6px 12px; cursor:pointer; } .pac-item:hover { background: #FFF4E8; } .pac-item-query { font-weight: 700; color: #3A241B; } ';
+            document.head.appendChild(style);
+        } else {
+            // Maps not loaded yet, retry after 500ms
+            setTimeout(tryInit, 500);
+        }
+    }
+    tryInit();
+}
+
 function updateMsgPreview() {
     const flavorsText = [...selectedFlavors].join(', ') || 'varios sabores';
     const cat = document.querySelector('input[name="category"]:checked')?.value || 'Cakepops';
-    const method = document.getElementById('order-method')?.value || 'Domicilio';
+    const method = document.getElementById('order-method')?.value || 'domicilio';
     const date = document.getElementById('order-date')?.value || 'fecha por confirmar';
     const preview = document.getElementById('msg-preview');
-    if (preview) {
-        preview.textContent = `"Hola Kpops! 🍭 Quiero ordenar ${orderQty} ${cat} (${flavorsText}) para ${method} en Pachuca el ${date}. ¿Me confirman disponibilidad? ✨"`;
+    if (!preview) return;
+
+    let deliveryText = '';
+    if (method === 'domicilio') {
+        const addr = document.getElementById('order-address')?.value.trim();
+        deliveryText = addr
+            ? `Dirección: ${addr}. Costo de envío $15.`
+            : 'Envío a domicilio ($15). Dirección por confirmar.';
+    } else {
+        const pickup = document.getElementById('order-pickup')?.value || 'Galerías';
+        deliveryText = `Punto de encuentro: ${pickup}. Sin costo de envío.`;
     }
+
+    preview.textContent = `"Hola Kpops! 🍩 Quiero ordenar ${orderQty} ${cat} (${flavorsText}) para el ${date}. ${deliveryText} ¿Me confirman disponibilidad? ✨"`;
 }
 
 // ═══ STAR RATING ════════════════════════════════════════
@@ -351,9 +414,17 @@ function initPageAnimations() {
 }
 
 function initScrollAnimations() {
-    gsap.from('.favorito-card', {
-        scrollTrigger: { trigger: '.favoritos-section', start: "top 88%" },
-        x: 40, opacity: 0, stagger: 0.09, ease: "back.out(1.2)", duration: 0.7
+    // Cards near the top — no scroll-reveal on favoritos (caused opacity:0 stuck on mobile).
+    // Just a lightweight entrance on the reviews section instead.
+    ScrollTrigger.create({
+        trigger: '.reviews-section',
+        start: 'top bottom',
+        onEnter: () => {
+            gsap.from('.rm-card', {
+                y: 20, opacity: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out'
+            });
+        },
+        once: true
     });
 }
 
@@ -390,6 +461,50 @@ function wireButtons() {
     document.getElementById('order-method')?.addEventListener('change', updateMsgPreview);
 }
 
+// ═══ Fix 5: SOCIAL PROOF TOAST ══════════════════════════
+const socialProofData = [
+    { name: 'Andrea M.', initial: 'A', product: 'Cakepops Red Velvet 🍭', time: 'hace 2 min' },
+    { name: 'Pao G.', initial: 'P', product: 'Brownie Bites 🍫', time: 'hace 5 min' },
+    { name: 'Karol V.', initial: 'K', product: 'Combo Especial 🎉', time: 'hace 8 min' },
+    { name: 'Sofía L.', initial: 'S', product: 'Caja 6 Cakepops 🍭', time: 'hace 12 min' },
+    { name: 'Daniela C.', initial: 'D', product: 'Cakepops Vainilla ✨', time: 'hace 15 min' },
+    { name: 'Mariana R.', initial: 'M', product: 'Brownie Nutella 🤎', time: 'hace 18 min' },
+    { name: 'Isa T.', initial: 'I', product: 'Pack 12 Cakepops 🍭', time: 'hace 20 min' },
+    { name: 'Rebeca S.', initial: 'R', product: 'Combo Surtido M 🎀', time: 'hace 23 min' },
+];
+
+function initSocialProofToast() {
+    const toast = document.getElementById('social-proof-toast');
+    const avatarEl = document.getElementById('toast-avatar');
+    const nameEl = document.getElementById('toast-name');
+    const detailEl = document.getElementById('toast-detail');
+    if (!toast) return;
+
+    let idx = 0;
+
+    function showToast() {
+        const entry = socialProofData[idx % socialProofData.length];
+        idx++;
+        avatarEl.textContent = entry.initial;
+        nameEl.textContent = entry.name;
+        detailEl.textContent = `acaba de pedir ${entry.product} ${entry.time}`;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 4000);
+    }
+
+    // First toast after 6 seconds, then every 10-14 seconds randomly
+    setTimeout(() => {
+        showToast();
+        setInterval(() => {
+            const delay = 10000 + Math.random() * 4000;
+            setTimeout(showToast, delay);
+        }, 14000);
+    }, 6000);
+}
+
 // ═══ INIT ════════════════════════════════════════════════
 window.addEventListener('load', () => {
     // Set initial modal state
@@ -401,12 +516,15 @@ window.addEventListener('load', () => {
     initMagnetic();
     initMenuTabs();
     initOrderForm();
+    initAddressAutocomplete();
     initStarRating();
     initPhotoUpload();
     initSubmitReview();
     wireButtons();
     initReviewStrips();
     renderDynamicReviews();
+    toggleDeliverySection(); // set initial state of delivery vs pickup
+    initSocialProofToast();
 
     // Start hero image cycling after a short delay
     setTimeout(() => {

@@ -10,6 +10,9 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Google Maps Places for address autocomplete -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&libraries=places"
+        async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -96,7 +99,8 @@
 
             <!-- Image Flipper (LEFT col on desktop) -->
             <div class="hero-image-col relative lg:flex-1 lg:max-w-[480px]">
-                <div id="hero-flipper" class="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-primary/5">
+                <div id="hero-flipper"
+                    class="w-full aspect-[3/4] max-h-[48vh] rounded-2xl overflow-hidden shadow-xl bg-primary/5 lg:max-h-none">
                     <img id="hero-img" class="hero-image w-full h-full object-cover transition-none"
                         alt="Kpops cakepops Pachuca" src="images/hero.jpg" />
                 </div>
@@ -141,7 +145,7 @@
                 </p>
 
                 <div class="flex flex-col gap-2.5">
-                    <a href="https://www.instagram.com" target="_blank"
+                    <a href="https://ig.me/m/kpopspachuca" target="_blank"
                         class="hero-action open-order-btn magnetic-btn w-full bg-primary text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-transform">
                         <span class="magnetic-text inline-flex items-center gap-2 text-sm">
                             <span class="material-symbols-outlined text-base">send</span>
@@ -162,62 +166,62 @@
                 <h3 class="text-lg font-black text-chocolate">Favoritos ✨</h3>
                 <button class="open-menu-btn text-xs font-bold text-primary hover:underline">Ver todos →</button>
             </div>
-            <div class="favoritos-grid flex overflow-x-auto no-scrollbar gap-3 px-4 pb-2">
+            <div class="favoritos-grid flex overflow-x-auto no-scrollbar gap-2.5 px-4 pb-2">
                 <div
-                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
-                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                    class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Cakepops" src="images/product1.jpg" />
                     </div>
-                    <p class="text-xs font-bold mb-0.5 truncate">Cakepops</p>
-                    <p class="text-primary font-black text-sm mb-2.5">$17 <span
-                            class="text-[10px] text-chocolate/40 font-medium">c/u</span></p>
+                    <p class="text-[11px] font-bold mb-0.5 truncate">Cakepops</p>
+                    <p class="text-primary font-black text-xs mb-2">$17 <span
+                            class="text-[9px] text-chocolate/40 font-medium">c/u</span></p>
                     <button
-                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-lg hover:bg-primary/20 transition-colors">ELEGIR</button>
                 </div>
                 <div
-                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
-                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                    class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Brownie Bites" src="images/product2.jpg" />
                     </div>
-                    <p class="text-xs font-bold mb-0.5 truncate">Brownie Bites</p>
-                    <p class="text-primary font-black text-sm mb-2.5">$165 <span
-                            class="text-[10px] text-chocolate/40 font-medium">caja</span></p>
+                    <p class="text-[11px] font-bold mb-0.5 truncate">Brownie Bites</p>
+                    <p class="text-primary font-black text-xs mb-2">$165 <span
+                            class="text-[9px] text-chocolate/40 font-medium">caja</span></p>
                     <button
-                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-lg hover:bg-primary/20 transition-colors">ELEGIR</button>
                 </div>
                 <div
-                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
-                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                    class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Caja 3 Brownies" src="images/product3.jpg" />
                     </div>
-                    <p class="text-xs font-bold mb-0.5 truncate">Caja 3 Brownies</p>
-                    <p class="text-primary font-black text-sm mb-2.5">$120 <span
-                            class="text-[10px] text-chocolate/40 font-medium">pack</span></p>
+                    <p class="text-[11px] font-bold mb-0.5 truncate">Caja 3 Brownies</p>
+                    <p class="text-primary font-black text-xs mb-2">$120 <span
+                            class="text-[9px] text-chocolate/40 font-medium">pack</span></p>
                     <button
-                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-lg hover:bg-primary/20 transition-colors">ELEGIR</button>
                 </div>
                 <div
-                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
-                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                    class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Cakepops con packaging"
                             src="images/product4.jpg" />
                     </div>
-                    <p class="text-xs font-bold mb-0.5 truncate">Caja 6 Cakepops</p>
-                    <p class="text-primary font-black text-sm mb-2.5">$102 <span
-                            class="text-[10px] text-chocolate/40 font-medium">pack</span></p>
+                    <p class="text-[11px] font-bold mb-0.5 truncate">Caja 6 Cakepops</p>
+                    <p class="text-primary font-black text-xs mb-2">$102 <span
+                            class="text-[9px] text-chocolate/40 font-medium">pack</span></p>
                     <button
-                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-lg hover:bg-primary/20 transition-colors">ELEGIR</button>
                 </div>
                 <div
-                    class="favorito-card min-w-[148px] bg-white rounded-2xl p-3 shadow-md border border-primary/5 flex-shrink-0">
-                    <div class="aspect-square rounded-xl overflow-hidden mb-2.5 bg-primary/5">
+                    class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
+                    <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Combo especial" src="images/product5.jpg" />
                     </div>
-                    <p class="text-xs font-bold mb-0.5 truncate">Combo Especial</p>
-                    <p class="text-primary font-black text-sm mb-2.5">$220 <span
-                            class="text-[10px] text-chocolate/40 font-medium">combo</span></p>
+                    <p class="text-[11px] font-bold mb-0.5 truncate">Combo Especial</p>
+                    <p class="text-primary font-black text-xs mb-2">$220 <span
+                            class="text-[9px] text-chocolate/40 font-medium">combo</span></p>
                     <button
-                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[11px] font-black rounded-xl hover:bg-primary/20 transition-colors">ELEGIR</button>
+                        class="open-order-btn w-full py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-lg hover:bg-primary/20 transition-colors">ELEGIR</button>
                 </div>
             </div>
         </section>
@@ -276,7 +280,7 @@
                     <p class="text-sm text-chocolate/55">Cada pedido se hace a mano, con ingredientes selectos. No somos
                         fábrica — somos artesanía dulce.</p>
                     <div class="flex gap-3">
-                        <a href="https://instagram.com" target="_blank"
+                        <a href="https://ig.me/m/kpopspachuca" target="_blank"
                             class="p-3 bg-chocolate/5 rounded-full flex items-center justify-center hover:bg-primary/15 transition-colors"
                             aria-label="Instagram">
                             <svg class="w-5 h-5 fill-chocolate" viewBox="0 0 24 24">
@@ -297,7 +301,7 @@
                 <div class="pt-5 border-t border-chocolate/10 space-y-3">
                     <p class="text-xs font-bold uppercase tracking-widest text-chocolate/35">Info</p>
                     <p class="text-sm font-semibold text-chocolate">Pachuca, Hgo. • Mar–Sáb 11am–7pm</p>
-                    <a href="https://www.instagram.com" target="_blank"
+                    <a href="https://ig.me/m/kpopspachuca" target="_blank"
                         class="inline-flex items-center gap-2 text-primary font-extrabold text-sm border-b-2 border-primary pb-0.5 hover:opacity-80 transition-opacity">
                         Pedir por Instagram <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </a>
@@ -311,7 +315,7 @@
             class="fixed bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] w-full px-4 pb-4 pt-2 pointer-events-none z-40 lg:hidden">
             <div
                 class="w-full flex gap-2 pointer-events-auto bg-white/95 backdrop-blur-xl p-2.5 rounded-2xl border border-primary/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)]">
-                <a href="https://www.instagram.com" target="_blank"
+                <a href="https://ig.me/m/kpopspachuca" target="_blank"
                     class="open-order-btn flex-[7] bg-primary text-white py-3.5 rounded-xl font-black text-sm shadow-lg shadow-primary/25 active:scale-95 transition-transform flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined text-base">send</span> Pedir por IG
                 </a>
@@ -329,11 +333,11 @@
 
     <!-- Modals Container - fixed, centered, max 720px wide -->
     <div id="modals-container"
-        class="fixed inset-0 z-70 pointer-events-none flex items-end justify-center overflow-hidden"
-        style="max-width:720px; left:50%; transform:translateX(-50%);">
+        class="fixed top-0 bottom-0 z-70 pointer-events-none flex items-end justify-center overflow-hidden"
+        style="width:100vw; max-width:720px; left:50%; transform:translateX(-50%);">
 
         <!-- ╔═══════ MENU SHEET ════════╗ -->
-        <div id="menu-sheet"
+        <div id="menu-sheet" style="display:none"
             class="w-full max-w-[720px] bg-white rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
             <!-- Handle + Close -->
             <div class="flex justify-center pt-3 pb-1 relative flex-shrink-0">
@@ -490,7 +494,7 @@
         </div>
 
         <!-- ╔═══════ ORDER SHEET ════════╗ -->
-        <div id="order-sheet"
+        <div id="order-sheet" style="display:none"
             class="w-full bg-background-light rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
             <div class="flex flex-col items-center pt-3 pb-2 relative border-b border-primary/5 flex-shrink-0">
                 <div class="w-10 h-1 bg-slate-200 rounded-full mb-3"></div>
@@ -576,9 +580,9 @@
                     </div>
                 </div>
                 <!-- Date & Method -->
-                <div class="mb-5 modal-animate-in">
+                <div class="mb-4 modal-animate-in">
                     <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">Entrega</h3>
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-2 gap-3 mb-3">
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Fecha</label>
                             <input type="date" id="order-date"
@@ -588,10 +592,46 @@
                             <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Método</label>
                             <select id="order-method"
                                 class="w-full px-3 py-2.5 bg-white border border-primary/15 rounded-xl text-xs font-medium text-chocolate focus:outline-none focus:ring-2 focus:ring-primary/30">
-                                <option>🛵 Domicilio</option>
-                                <option>🏪 Recoger</option>
+                                <option value="domicilio">🛵 Domicilio</option>
+                                <option value="recoger">🏪 Punto de encuentro</option>
                             </select>
                         </div>
+                    </div>
+
+                    <!-- Domicilio: address + fee -->
+                    <div id="delivery-section">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Dirección de
+                            entrega</label>
+                        <div class="relative mb-2">
+                            <span
+                                class="material-symbols-outlined text-primary absolute left-3 top-1/2 -translate-y-1/2 text-base pointer-events-none">location_on</span>
+                            <input type="text" id="order-address" placeholder="Busca tu calle o colonia..."
+                                autocomplete="off"
+                                class="w-full pl-8 pr-3 py-2.5 bg-white border border-primary/15 rounded-xl text-xs font-medium text-chocolate focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-slate-300" />
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-primary/8 border border-primary/15 rounded-xl px-3 py-2.5">
+                            <span class="material-symbols-outlined text-primary text-base">local_shipping</span>
+                            <span class="text-xs font-bold text-chocolate">Costo de envío: <span
+                                    class="text-primary">$15 MXN</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Punto de encuentro: select location -->
+                    <div id="pickup-section" style="display:none">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Punto de
+                            encuentro</label>
+                        <select id="order-pickup"
+                            class="w-full px-3 py-2.5 bg-white border border-primary/15 rounded-xl text-xs font-medium text-chocolate focus:outline-none focus:ring-2 focus:ring-primary/30">
+                            <option value="Galerías">📍 Galerías</option>
+                            <option value="Gran Patio">📍 Gran Patio</option>
+                            <option value="Zona Plateada">📍 Zona Plateada</option>
+                            <option value="Salle Concepción">📍 Salle Concepción</option>
+                            <option value="ICSA">📍 ICSA</option>
+                            <option value="Tec de Monterrey">📍 Tec de Monterrey</option>
+                        </select>
+                        <p class="text-[10px] text-chocolate/50 mt-1.5 italic">🚗 Sin costo de envío en puntos de
+                            encuentro</p>
                     </div>
                 </div>
                 <!-- Message Preview -->
@@ -613,7 +653,7 @@
                     class="w-full py-3.5 flex items-center justify-center gap-2 bg-slate-100 text-chocolate rounded-xl font-bold text-sm active:scale-95 transition-transform hover:bg-slate-200">
                     <span class="material-symbols-outlined text-base">content_copy</span> Copiar mensaje
                 </button>
-                <a href="https://www.instagram.com" target="_blank"
+                <a href="https://ig.me/m/kpopspachuca" target="_blank"
                     class="w-full py-3.5 flex items-center justify-center gap-2 bg-primary text-white rounded-xl font-black text-sm shadow-lg shadow-primary/30 active:scale-95 transition-transform">
                     <span class="material-symbols-outlined text-base">send</span> Abrir Instagram DM
                 </a>
@@ -621,7 +661,7 @@
         </div>
 
         <!-- ╔═══════ REVIEW SHEET ═══════╗ -->
-        <div id="review-sheet"
+        <div id="review-sheet" style="display:none"
             class="w-full bg-background-light rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] flex flex-col h-[88vh] pointer-events-auto relative border border-primary/10">
             <div class="w-full flex justify-center pt-3 pb-1 relative flex-shrink-0">
                 <div class="w-10 h-1 bg-slate-200 rounded-full"></div>
@@ -680,6 +720,15 @@
         </div>
 
     </div><!-- end modals-container -->
+
+    <!-- Fix 5: Social Proof Toast -->
+    <div id="social-proof-toast">
+        <div class="toast-avatar" id="toast-avatar">A</div>
+        <div class="toast-body">
+            <span class="toast-name" id="toast-name">Andrea M.</span>
+            <span class="toast-detail" id="toast-detail">acaba de pedir Cakepops 🍭 hace 2 min</span>
+        </div>
+    </div>
 
     <!-- Google Fonts load -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
