@@ -10,9 +10,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Google Maps Places for address autocomplete -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&libraries=places"
-        async defer></script>
+    <!-- Google Maps loaded lazily when order modal opens (see script.js initAddressAutocomplete) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -170,7 +168,7 @@
                 <div
                     class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
                     <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
-                        <img class="w-full h-full object-cover" alt="Cakepops" src="images/product1.jpg" />
+                        <img class="w-full h-full object-cover" alt="Cakepops" src="images/product1.jpg" loading="lazy" />
                     </div>
                     <p class="text-[11px] font-bold mb-0.5 truncate">Cakepops</p>
                     <p class="text-primary font-black text-xs mb-2">$17 <span
@@ -181,7 +179,7 @@
                 <div
                     class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
                     <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
-                        <img class="w-full h-full object-cover" alt="Brownie Bites" src="images/product2.jpg" />
+                        <img class="w-full h-full object-cover" alt="Brownie Bites" src="images/product2.jpg" loading="lazy" />
                     </div>
                     <p class="text-[11px] font-bold mb-0.5 truncate">Brownie Bites</p>
                     <p class="text-primary font-black text-xs mb-2">$165 <span
@@ -192,7 +190,7 @@
                 <div
                     class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
                     <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
-                        <img class="w-full h-full object-cover" alt="Caja 3 Brownies" src="images/product3.jpg" />
+                        <img class="w-full h-full object-cover" alt="Caja 3 Brownies" src="images/product3.jpg" loading="lazy" />
                     </div>
                     <p class="text-[11px] font-bold mb-0.5 truncate">Caja 3 Brownies</p>
                     <p class="text-primary font-black text-xs mb-2">$120 <span
@@ -204,7 +202,7 @@
                     class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
                     <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
                         <img class="w-full h-full object-cover" alt="Cakepops con packaging"
-                            src="images/product4.jpg" />
+                            src="images/product4.jpg" loading="lazy" />
                     </div>
                     <p class="text-[11px] font-bold mb-0.5 truncate">Caja 6 Cakepops</p>
                     <p class="text-primary font-black text-xs mb-2">$102 <span
@@ -215,7 +213,7 @@
                 <div
                     class="favorito-card min-w-[120px] bg-white rounded-xl p-2.5 shadow-md border border-primary/5 flex-shrink-0">
                     <div class="aspect-square rounded-lg overflow-hidden mb-2 bg-primary/5">
-                        <img class="w-full h-full object-cover" alt="Combo especial" src="images/product5.jpg" />
+                        <img class="w-full h-full object-cover" alt="Combo especial" src="images/product5.jpg" loading="lazy" />
                     </div>
                     <p class="text-[11px] font-bold mb-0.5 truncate">Combo Especial</p>
                     <p class="text-primary font-black text-xs mb-2">$220 <span
@@ -367,7 +365,7 @@
                 <!-- Cakepops Panel -->
                 <div class="tab-panel active" data-panel="cakepops">
                     <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
-                        <img class="w-full h-full object-cover" src="images/product1.jpg" alt="Cakepops" />
+                        <img class="w-full h-full object-cover" src="images/product1.jpg" alt="Cakepops" loading="lazy" />
                     </div>
                     <div class="flex justify-between items-baseline mb-2">
                         <h3 class="text-xl font-black text-chocolate">Cakepops Artesanales</h3>
@@ -413,7 +411,7 @@
                 <!-- Brownies Panel -->
                 <div class="tab-panel" data-panel="brownies">
                     <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
-                        <img class="w-full h-full object-cover" src="images/product2.jpg" alt="Brownie Bites" />
+                        <img class="w-full h-full object-cover" src="images/product2.jpg" alt="Brownie Bites" loading="lazy" />
                     </div>
                     <div class="flex justify-between items-baseline mb-2">
                         <h3 class="text-xl font-black text-chocolate">Brownie Bites</h3>
@@ -449,7 +447,7 @@
                 <!-- Combos Panel -->
                 <div class="tab-panel" data-panel="cajas">
                     <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4 shadow-md bg-primary/5">
-                        <img class="w-full h-full object-cover" src="images/product3.jpg" alt="Combos" />
+                        <img class="w-full h-full object-cover" src="images/product3.jpg" alt="Combos" loading="lazy" />
                     </div>
                     <div class="flex justify-between items-baseline mb-2">
                         <h3 class="text-xl font-black text-chocolate">Combos Especiales</h3>

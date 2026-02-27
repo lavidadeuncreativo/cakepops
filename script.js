@@ -105,22 +105,21 @@ function openModal(el) {
     if (!el || activeModal === el) return;
 
     if (activeModal) {
-        // Fix 2: slower, smoother slide out
-        gsap.to(activeModal, { y: "100%", duration: 0.5, ease: "power3.inOut", onComplete: () => gsap.set(activeModal, { display: "none" }) });
+        gsap.to(activeModal, { y: '100%', duration: 0.4, ease: 'power3.in', onComplete: () => gsap.set(activeModal, { display: 'none' }) });
     } else {
-        gsap.to(sys.appContainer, { scale: 0.94, y: 6, borderRadius: "28px", filter: "brightness(0.6) blur(2px)", duration: 0.65, ease: "premium" });
-        gsap.to(sys.backdrop, { opacity: 1, duration: 0.45, pointerEvents: 'auto' });
+        // Only dim+scale — NO blur (blur forces GPU repaint and freezes mobile)
+        gsap.to(sys.appContainer, { scale: 0.96, borderRadius: '24px', filter: 'brightness(0.65)', duration: 0.45, ease: 'power2.out' });
+        gsap.to(sys.backdrop, { opacity: 1, duration: 0.35, pointerEvents: 'auto' });
         sys.modalsContainer.style.pointerEvents = 'auto';
     }
 
     activeModal = el;
     gsap.set(el, { display: 'flex' });
-    // Fix 2: slower, smoother slide up
-    gsap.fromTo(el, { y: "100%" }, { y: "0%", duration: 0.75, ease: "premium" });
+    gsap.fromTo(el, { y: '100%' }, { y: '0%', duration: 0.55, ease: 'power3.out' });
 
     const animEls = el.querySelectorAll('.modal-animate-in');
     if (animEls.length) {
-        gsap.fromTo(animEls, { y: 24, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.8, ease: "power3.out", delay: 0.25 });
+        gsap.fromTo(animEls, { y: 16, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.5, ease: 'power2.out', delay: 0.15 });
     }
 }
 
@@ -129,10 +128,9 @@ function closeModal() {
     const toClose = activeModal;
     activeModal = null;
 
-    // Fix 2: smoother close
-    gsap.to(toClose, { y: "100%", duration: 0.55, ease: "power3.inOut", onComplete: () => gsap.set(toClose, { display: 'none' }) });
-    gsap.to(sys.appContainer, { scale: 1, y: 0, borderRadius: "0px", filter: "brightness(1) blur(0px)", duration: 0.6, ease: "premium", delay: 0.08 });
-    gsap.to(sys.backdrop, { opacity: 0, duration: 0.45, pointerEvents: 'none', delay: 0.08, onComplete: () => { sys.modalsContainer.style.pointerEvents = 'none'; } });
+    gsap.to(toClose, { y: '100%', duration: 0.4, ease: 'power3.in', onComplete: () => gsap.set(toClose, { display: 'none' }) });
+    gsap.to(sys.appContainer, { scale: 1, borderRadius: '0px', filter: 'brightness(1)', duration: 0.4, ease: 'power2.out', delay: 0.05 });
+    gsap.to(sys.backdrop, { opacity: 0, duration: 0.35, pointerEvents: 'none', delay: 0.05, onComplete: () => { sys.modalsContainer.style.pointerEvents = 'none'; } });
 }
 
 // ═══ MENU TABS ══════════════════════════════════════════
@@ -251,16 +249,23 @@ function initAddressAutocomplete() {
                     updateMsgPreview();
                 }
             });
-            // Style the pac-container (dropdown) to match our design
             const style = document.createElement('style');
-            style.textContent = '.pac-container { font-family: \'Plus Jakarta Sans\', sans-serif; border-radius: 12px; border: 1px solid rgba(242,74,105,0.2); box-shadow: 0 8px 24px rgba(0,0,0,0.12); margin-top: 4px; } .pac-item { font-size: 11px; padding: 6px 12px; cursor:pointer; } .pac-item:hover { background: #FFF4E8; } .pac-item-query { font-weight: 700; color: #3A241B; } ';
+            style.textContent = ".pac-container{font-family:'Plus Jakarta Sans',sans-serif;border-radius:12px;border:1px solid rgba(242,74,105,0.2);box-shadow:0 8px 24px rgba(0,0,0,0.12);margin-top:4px}.pac-item{font-size:11px;padding:6px 12px;cursor:pointer}.pac-item:hover{background:#FFF4E8}.pac-item-query{font-weight:700;color:#3A241B}";
             document.head.appendChild(style);
         } else {
-            // Maps not loaded yet, retry after 500ms
-            setTimeout(tryInit, 500);
+            setTimeout(tryInit, 600);
         }
     }
-    tryInit();
+
+    // Lazy-load Maps API only now (not on page load) — saves ~200KB on initial load
+    if (!window.google) {
+        const script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&libraries=places&callback=Function.prototype';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+    setTimeout(tryInit, 800);
 }
 
 function updateMsgPreview() {

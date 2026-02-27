@@ -30,10 +30,12 @@ body {
 #order-sheet,
 #review-sheet {
     will-change: transform;
+    overscroll-behavior: contain;
+    /* prevent scroll bleed-through on mobile */
 }
 
 #app-container {
-    will-change: transform, filter, border-radius;
+    will-change: transform, filter;
 }
 
 /* ── TV Marquee Ticker ───────────────────────────────────── */
